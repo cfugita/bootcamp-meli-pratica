@@ -1,7 +1,7 @@
 package AulaJava_3.TM_1;
 
 public class SortUtil {
-    public static <T> T[] sortUtil (Precedente <T> arr []) {
+    public static <T> T[] sortUtil (Precedente<T>[] arr) {
 
         for (int i = 0; i < arr.length; i++){
             for(int j = i; j < arr.length; j++){

@@ -3,8 +3,7 @@ package AulaJava_3;
 import AulaJava_3.TM_1.Celular;
 import AulaJava_3.TM_1.Pessoa;
 import AulaJava_3.TM_1.SortUtil;
-import AulaJava_3.TM_2.HeapSortSorterImple;
-import AulaJava_3.TM_2.QuickSortSorterImple;
+import AulaJava_3.TM_2.*;
 
 public class AulaJava_3 {
     public static void main(String[] args) {
@@ -43,40 +42,56 @@ public class AulaJava_3 {
 
         Celular[] sortedArrayCelular = SortUtil.sortUtil(arrayCelular);
 
-        for(int i = 0; i < sorted.length; i++) {
-            System.out.println(sortedArrayCelular[i].getNumero());
+        for (Celular celular : sortedArrayCelular) {
+            System.out.println(celular.getNumero());
         }
     }
 
     public static void TM_2 () {
         Integer [] arrayInt =  {7,3,9,13,10,8,1};
-        String [] arrayStr =  {"Julia","Renata","Marina","Carolina","Juliana","Iasmim","Bianca"};
 
         QuickSortSorterImple<Integer> quickSortInt = new QuickSortSorterImple<Integer>();
-        QuickSortSorterImple<String> quickSortStr = new QuickSortSorterImple<String>();
-        Integer [] quickIntSorted = quickSortInt.sort(arrayInt,Integer::compareTo);
-        String [] quickStrSorted = quickSortStr.sort(arrayStr,String::compareTo);
-
         HeapSortSorterImple<Integer> heapSortInt = new HeapSortSorterImple<Integer>();
-        HeapSortSorterImple<String> heapSortStr = new HeapSortSorterImple<String>();
+
+        Timer timerQuick = new Timer();
+        Timer timerHeap = new Timer();
+
+        timerQuick.start();
+        Integer [] quickIntSorted = quickSortInt.sort(arrayInt,Integer::compareTo);
+        timerQuick.end();
+
+        timerHeap.start();
         Integer [] heapIntSorted = heapSortInt.sort(arrayInt,Integer::compareTo);
+        timerHeap.end();
+
+        System.out.println(
+                "Sorting Integer array\n" +
+                "timer for QuickSort: " + timerQuick.getElapsedTime() + "\n" +
+                "timer for HeapSort: " + timerHeap.getElapsedTime() + "\n");
+
+        /*for (Integer integer : quickIntSorted) { System.out.println(integer); }
+        for (Integer integer : heapIntSorted) { System.out.println(integer); }*/
+
+
+        String [] arrayStr =  {"Julia","Renata","Marina","Carolina","Juliana","Iasmim","Bianca"};
+
+        QuickSortSorterImple<String> quickSortStr = new QuickSortSorterImple<String>();
+        HeapSortSorterImple<String> heapSortStr = new HeapSortSorterImple<String>();
+
+        timerQuick.start();
+        String [] quickStrSorted = quickSortStr.sort(arrayStr,String::compareTo);
+        timerQuick.end();
+
+        timerHeap.start();
         String [] heapStrSorted = heapSortStr.sort(arrayStr,String::compareTo);
+        timerHeap.end();
 
-        for (Integer integer : quickIntSorted) {
-            System.out.println(integer);
-        }
+        System.out.println(
+                "Sorting String array\n" +
+                "timer for QuickSort: " + timerQuick.getElapsedTime() + "\n" +
+                "timer for HeapSort: " + timerHeap.getElapsedTime() + "\n");
 
-        for (String s : quickStrSorted) {
-            System.out.println(s);
-        }
-
-
-        for (Integer integer : heapIntSorted) {
-            System.out.println(integer);
-        }
-
-        for (String s : heapStrSorted) {
-            System.out.println(s);
-        }
+        /*for (String s : quickStrSorted) { System.out.println(s); }
+        for (String s : heapStrSorted) { System.out.println(s); }*/
     }
 }
